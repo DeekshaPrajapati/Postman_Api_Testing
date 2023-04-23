@@ -1,0 +1,631 @@
+{
+	"info": {
+		"_postman_id": "55cad35e-49b0-4864-be43-59e8694c3002",
+		"name": "DemoRestApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18546824"
+	},
+	"item": [
+		{
+			"name": "GET API",
+			"item": [
+				{
+					"name": "User List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 200;\r",
+									"tests[\"Validating response body\"] = responseBody.has(\"data\");\r",
+									"\r",
+									"var response = JSON.parse(responseBody);\r",
+									"tests[\"Page no.\"]= response.page == 2;\r",
+									"tests[\" Total Page\"]= response.total_pages == 2;\r",
+									"tests[\" Per Page Entry\"]= response.per_page == 6;\r",
+									"tests[\" Data id\"]= response.id == 2;\r",
+									"tests[\" Validating a first name\"]= response.data.first_name == \"Lindsay\";\r",
+									"tests[\" Validating a last name\"]= response.data.last_name == \"Ferguson\";\r",
+									"tests[\" Velidating a Email\"]= response.data.email == \"lindsay.ferguson@reqres.in\";"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users?page=2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Single User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 200;\r",
+									"tests[\"Validating response body\"] = responseBody.has(\"data\");\r",
+									"var response = JSON.parse(responseBody);\r",
+									"tests[\" Data id\"]= response.data.id == 2;\r",
+									"tests[\" Validating a first name\"]= response.data.first_name == \"Janet\";\r",
+									"tests[\" Validating a last name\"]= response.data.last_name == \"Weaver\";\r",
+									"tests[\" Velidating a Email\"]= response.data.email == \"janet.weaver@reqres.in\";\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Single User Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 200;\r",
+									"tests[\"Validating Status Code\"] = responseCode.code == 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/23",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User List <Resource>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 200;\r",
+									"tests[\"Validating response body\"] = responseBody.has(\"data\");\r",
+									"\r",
+									"var response = JSON.parse(responseBody);\r",
+									"tests[\"Page no.\"]= response.page == 1;\r",
+									"tests[\" Total Page\"]= response.total_pages == 2;\r",
+									"tests[\" Per Page Entry\"]= response.per_page == 6;\r",
+									"tests[\" Per Page Entry\"]= response.total == 12;\r",
+									"tests[\" Data id\"]= response.data.id == 2;\r",
+									"tests[\" Validating a Name\"]= response.data.name == \"cerulean\";\r",
+									"tests[\" Validating a Year\"]= response.data.year == 2000;\r",
+									"tests[\" Validating a Pantone Value\"]= response.data.pantone_value == \"15-4020\";\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/unknown\n",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"unknown\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Single User <Resource>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 200;\r",
+									"tests[\"Validating response body\"] = responseBody.has(\"data\");\r",
+									"\r",
+									"var response = JSON.parse(responseBody);\r",
+									"tests[\" Validating a  name\"]= response.data.name == \"fuchsia rose\";\r",
+									"tests[\" Validating a  year\"]= response.data.year == 2001;\r",
+									"tests[\" Validating a  pantone_value\"]= response.data.pantone_value == \"17-2031\";\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/unknown/2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"unknown",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Single User <Resource> Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 404;\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/unknown/23\n",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"unknown",
+								"23\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authorization Api",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "postman",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://postman-echo.com/basic-auth",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"basic-auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PUT API",
+			"item": [
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 200;\r",
+									"tests[\" Validating a name\"]= responseBody.has (\"Deeksha\");\r",
+									"tests[\" Validating a job\"]= responseBody.has (\"xyz\");\r",
+									"tests[\" Validating a job\"]= responseBody.has (\"Automation Tester\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Deeksha\",\r\n    \"job\": \"Automation Tester\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users/2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST API",
+			"item": [
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 201;\r",
+									"var response = JSON.parse(responseBody);\r",
+									"tests[\" Validating a  name\"]= response.name== \"morpheus\";\r",
+									"tests[\" Validating a  name\"]= response.job== \"leader\";\r",
+									"//tests[\" Validating a  name\"]= responseBody.has (\"morpheus\");\r",
+									"//tests[\" Validating a  job\"]= responseBody.has  (\"leader\");\r",
+									"tests[\" Validating a  id\"]= responseBody ==\"894\";"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Unsuccessfully",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 400;\r",
+									"tests[\" Validating a error message\"]= responseBody.has (\"error\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sydney@fife\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/register",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Successfull",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 200;\r",
+									"tests[\" Validating a  token\"]= responseBody.has (\"token\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/login",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Unsuccessfull",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 400;\r",
+									"tests[\" Validating a error message\"]= responseBody.has (\"error\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"peter@klaven\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/login",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ComplexApi",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"instructor\": \"Subhasish\",\r\n    \"url\": \"softwaretestingautomation.com\",\r\n    \"expertise\": \"Testing\",\r\n    \"courses\": {\r\n        \"webAutomation\": [\r\n            {\r\n                \"courseTitle\": \"Selenium\",\r\n                \"price\": 4000\r\n            },\r\n            {\r\n                \"courseTitle\": \"Protractor\",\r\n                \"price\": 5000\r\n            }\r\n        ],\r\n        \"apiAutomation\": [\r\n            {\r\n                \"courseTitle\": \"RestAssure\",\r\n                \"price\": 5000\r\n            },\r\n            {\r\n                \"courseTitle\": \"Protractor\",\r\n                \"price\": 3000\r\n            }\r\n        ],\r\n        \"mobileAutomation\": [\r\n            {\r\n                \"courseTitle\": \"Appium\",\r\n                \"price\": 50\r\n            }\r\n        ]\r\n    },\r\n    \"linkedIn\": \"LinkeddinID\",\r\n    \"services\": \"Software Testing\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PATCH API",
+			"item": [
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 200;\r",
+									"tests[\" Validating a  name\"]= responseBody.has (\"shaily\");\r",
+									"tests[\" Validating a  job\"]= responseBody.has (\"Tester\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"shaily\",\r\n    \"job\": \"Tester\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users/3",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE API",
+			"item": [
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Validating Status Code\"] = responseCode.code == 204;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users/2\n",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"2\n"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
